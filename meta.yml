@@ -1,0 +1,21 @@
+
+#cloud-config
+disable_root: true
+timezone: Europe/Moscow
+repo_update: true
+apt:
+  preserve_sources_list: true
+packages:
+ - nginx
+runcmd:
+ - [ systemctl, nginx-reload ]
+ - [ systemctl, enable, nginx.service ]
+ - [ systemctl, start, --no-block, nginx.service ]
+users:
+ - name: vajnichev
+   groups: sudo
+   shell: /bin/bash
+   sudo: ['ALL=(ALL) NOPASSWD:ALL']
+   ssh-authorized-keys:
+     - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCwIeWawrtHFqGg1vFo6kzvv5ZqaPaRjoWaHTu5tqSivUm79LgPM4dK/ydcNeVykO6WNSjYcaCRa5l25EIJHkHRM8+9Zy1SqsIjqN4faV3tXbMMZNHyfh+kp+vSHRADfSjRbptRsebT8SdBuw1YAJf9g4M+G4J/eiysp4e9ARIb7BRWyaJg6LZ35T09QSeutO8KZHDHEzQ6TiLtbFHo9OnFSC4HRORecGN9YQJmIOPkCB31mXLSm9cjFqHD7Vugpx3SwKufp+wt3C7zBh/jsMRgsF3NtOAigH0HhGKvGB+BeQgLH3/Oro7aFgbE8GAoFxaPyqWkAZMdTXISljOlyBuZ georgiy@georgiy-ubuntu
+
